@@ -1,3 +1,5 @@
+const signUp = document.getElementById("sign-up");
+
 function login() {
   const enteredUsername = document.getElementById("username").value;
   const enteredPassword = document.getElementById("password").value;
@@ -9,11 +11,15 @@ function login() {
     enteredUsername == correctUsername &&
     enteredPassword == correctPassword
   ) {
-    window.location.href = "todo.html";
+    window.location.href = "/HTML/signup.html";
   } else {
     alert("Invalid username or password. Please try again.");
   }
 }
+
+signUp.addEventListener("click", () => {
+  window.location.href = "/HTML/signup.html";
+});
 
 const addedDiv = document.getElementById("todoList");
 function addToDo() {
