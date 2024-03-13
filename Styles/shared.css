@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 body {
   width: 100%;
@@ -20,8 +22,6 @@ body {
   height: 50vh;
   margin-top: 10%;
   gap: 30px;
-  background-color: #fff7f7;
-
   border-radius: 14px;
   background: transparent;
 }
@@ -35,4 +35,59 @@ body {
 
 .flex-direction-column {
   flex-direction: column;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.user-login {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+}
+
+.user-login i {
+  margin-top: 4%;
+}
+
+.user-login input {
+  width: 75%;
+  height: 140%;
+  font-size: 85%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding-left: 5px;
+}
+
+input:focus {
+  border-color: #00abe4;
+  box-shadow: 0 0 8px #00abe4;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+
+.button a {
+  display: flex;
+  width: 10vw;
+  height: 5vh;
+  font-size: 14px;
+  margin: 5%;
+  cursor: pointer;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #00abe4;
+  color: #fff7f7;
+}
+
+.button:hover a {
+  background-color: #007197;
 }
