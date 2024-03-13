@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #00abe4;
+  background-image: url("/Assets/Background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.wrapper {
+  position: relative;
+  z-index: 1;
+  width: 25%;
+  height: 50vh;
+  margin-top: 10%;
+  gap: 30px;
+  background-color: #fff7f7;
+
+  border-radius: 14px;
+  background: transparent;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}

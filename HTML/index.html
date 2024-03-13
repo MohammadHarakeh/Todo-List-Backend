@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/Styles/index.css" />
+    <link rel="stylesheet" href="/Styles/shared.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha384-..."
+    />
+
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="wrapper centered flex-direction-column">
+      <div class="wrapper-title">
+        <h1>Hello! To-Do Awaits. Sign In to Begin!</h1>
+      </div>
+
+      <div class="user-login">
+        <i class="fa-solid fa-user"></i>
+        <input placeholder="Username" id="username" />
+      </div>
+
+      <div class="user-login">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" placeholder="Password" id="password" />
+      </div>
+
+      <div class="buttons-wrapper">
+        <div class="button" id="login">
+          <a href="#" onclick="login()">Login</a>
+        </div>
+
+        <div class="button">
+          <a href="#">Forgot Password</a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/Scripts/login.js"></script>
+</html>
