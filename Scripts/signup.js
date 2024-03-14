@@ -1,28 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const back = document.getElementById("back");
-  const formWrapper = document.getElementById("form-wrapper");
-  const errorMessage = document
-    .getElementById("error-message")
-    .querySelector("p");
-  const register = document.getElementById("register");
+const back = document.getElementById("back");
+const errorMessage = document
+  .getElementById("error-message")
+  .querySelector("p");
+const register = document.getElementById("register");
 
-  back.addEventListener("click", () => {
-    window.location.href = "/HTML/index.html";
-  });
+back.addEventListener("click", () => {
+  window.location.href = "/HTML/index.html";
+});
 
-  register.addEventListener("click", () => {
-    const email = document.getElementById("email").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
+register.addEventListener("click", () => {
+  const email = document.getElementById("email").value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-    console.log("clicked");
-    if (password !== confirmPassword) {
-      errorMessage.textContent = "Passwords do not match. Try again.";
-      return;
-    }
+  if (password !== confirmPassword) {
+    errorMessage.textContent = "Passwords do not match. Try again.";
+    return;
+  }
 
+  try {
     const formData = new FormData();
+
     formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
@@ -31,12 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
       method: "POST",
       body: formData,
     })
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
+        console.log("Response from server:", data);
+
+        if (data.status === "error") {
+          errorMessage.textContent = data.message;
+        }
       });
-  });
+  } catch (error) {
+    console.error("Error:", error);
+  }
 });
