@@ -22,6 +22,7 @@ if ($num_rows == 0) {
         $response['user_id'] = $id;
         $response['username'] = $username;
         $response['email'] = $email;
+
     } else {
         $response['status'] = "incorrect credentials";
     }

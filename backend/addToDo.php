@@ -1,9 +1,12 @@
 <?php
 include('connection.php');
+header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
 
-$user_id = $_POST['user_id'];
-$task = $_POST['task'];
-$checkTask = $_POST['check_task'];
+$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+$task = isset($_POST['task']) ? $_POST['task'] : '';
+$checkTask = isset($_POST['check_task']) ? $_POST['check_task'] : '';
 
 
 $check_task_query = $mysqli->prepare('SELECT task FROM  todo WHERE user_id=? AND task=?');

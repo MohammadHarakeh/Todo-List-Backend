@@ -12,14 +12,14 @@ login.addEventListener("click", () => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    const formData = { username: "", password: "", email: "" };
+    const formData = new FormData();
 
     if (isValidEmail(username)) {
-      formData.email = username;
+      formData.append("email", username);
     } else {
-      formData.username = username;
+      formData.append("username", username);
     }
-    formData.password = password;
+    formData.append("password", password);
 
     fetch("http://127.0.0.1/todo-list-backend/backend/signin.php", {
       method: "POST",
@@ -31,9 +31,9 @@ login.addEventListener("click", () => {
 
         if (data.status === "error") {
           errorMessage.textContent = data.message;
-        } else if ((data.status = "logged in")) {
+        } else if (data.status === "logged in") {
+          localStorage.setItem("userId", data.user_id);
           window.location.href = "/HTML/todo.html";
-          console.log("clicked");
         }
       });
   } catch (error) {
