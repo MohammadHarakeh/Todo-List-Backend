@@ -91,3 +91,11 @@ input:focus {
 .button:hover a {
   background-color: #007197;
 }
+
+.hidden {
+  display: none;
+}
+
+.shown {
+  display: block;
+}
