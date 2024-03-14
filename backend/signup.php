@@ -4,9 +4,9 @@ header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
-$userName = $_POST['username'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+$userName = isset($_POST['username']) ? $_POST['username'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
 
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 

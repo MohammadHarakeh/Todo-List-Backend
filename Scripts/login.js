@@ -1,22 +1,5 @@
 const signUp = document.getElementById("sign-up");
 
-// function login() {
-//   const enteredUsername = document.getElementById("username").value;
-//   const enteredPassword = document.getElementById("password").value;
-
-//   const correctUsername = "AdminSEF123";
-//   const correctPassword = "SeF@ctORy$$456";
-
-//   if (
-//     enteredUsername == correctUsername &&
-//     enteredPassword == correctPassword
-//   ) {
-//     window.location.href = "/HTML/signup.html";
-//   } else {
-//     alert("Invalid username or password. Please try again.");
-//   }
-// }
-
 const addedDiv = document.getElementById("todoList");
 function addToDo() {
   const userInput = document.getElementById("todoInput").value;
@@ -69,7 +52,7 @@ function deleteItem(id) {
   const toDelete = document.getElementById(id);
   if (toDelete) {
     toDelete.remove();
-    saveLocal();
+    // saveLocal();
   }
 }
 
@@ -84,39 +67,10 @@ function doneItem(id) {
     }
 
     toDone.style.cursor = "pointer";
-    saveLocal();
+    // saveLocal();
   }
 }
 
 signUp.addEventListener("click", () => {
   window.location.href = "/HTML/signup.html";
 });
-
-// function saveLocal() {
-//   localStorage.setItem("data", addedDiv.innerHTML);
-// }
-
-// function getLocal() {
-//   addedDiv.innerHTML = localStorage.getItem("data");
-// }
-
-// function getLocal() {
-//   addedDiv.innerHTML = localStorage.getItem("data");
-
-//   const allItems = addedDiv.querySelectorAll("div");
-//   allItems.forEach((item) => {
-//     const content = item.querySelector("p");
-//     const trashIcon = item.querySelector("i");
-
-//     content.addEventListener("click", function () {
-//       doneItem(item.id);
-//       saveLocal();
-//     });
-
-//     trashIcon.addEventListener("click", function () {
-//       deleteItem(item.id);
-//     });
-//   });
-// }
-
-// getLocal();

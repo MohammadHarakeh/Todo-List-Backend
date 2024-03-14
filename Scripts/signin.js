@@ -1,14 +1,25 @@
-const username = document.getElementById("username").value;
-const password = document.getElementById("password").value;
 const login = document.getElementById("login");
 const errorMessage = document.getElementById("error-message");
+let input;
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 login.addEventListener("click", () => {
   try {
-    const formData = new FormData();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-    formData.append("username", username);
-    formData.append("password", password);
+    const formData = { username: "", password: "", email: "" };
+
+    if (isValidEmail(username)) {
+      formData.email = username;
+    } else {
+      formData.username = username;
+    }
+    formData.password = password;
 
     fetch("http://127.0.0.1/todo-list-backend/backend/signin.php", {
       method: "POST",
@@ -20,8 +31,8 @@ login.addEventListener("click", () => {
 
         if (data.status === "error") {
           errorMessage.textContent = data.message;
-        } else if (data.status === "success") {
-          //   window.location.href = "/HTML/index.html";
+        } else if ((data.status = "logged in")) {
+          window.location.href = "/HTML/todo.html";
           console.log("clicked");
         }
       });
