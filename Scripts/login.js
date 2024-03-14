@@ -1,25 +1,21 @@
 const signUp = document.getElementById("sign-up");
 
-function login() {
-  const enteredUsername = document.getElementById("username").value;
-  const enteredPassword = document.getElementById("password").value;
+// function login() {
+//   const enteredUsername = document.getElementById("username").value;
+//   const enteredPassword = document.getElementById("password").value;
 
-  const correctUsername = "AdminSEF123";
-  const correctPassword = "SeF@ctORy$$456";
+//   const correctUsername = "AdminSEF123";
+//   const correctPassword = "SeF@ctORy$$456";
 
-  if (
-    enteredUsername == correctUsername &&
-    enteredPassword == correctPassword
-  ) {
-    window.location.href = "/HTML/signup.html";
-  } else {
-    alert("Invalid username or password. Please try again.");
-  }
-}
-
-signUp.addEventListener("click", () => {
-  window.location.href = "/HTML/signup.html";
-});
+//   if (
+//     enteredUsername == correctUsername &&
+//     enteredPassword == correctPassword
+//   ) {
+//     window.location.href = "/HTML/signup.html";
+//   } else {
+//     alert("Invalid username or password. Please try again.");
+//   }
+// }
 
 const addedDiv = document.getElementById("todoList");
 function addToDo() {
@@ -37,7 +33,7 @@ function addToDo() {
   content.innerText = userInput;
   content.addEventListener("click", function () {
     doneItem(outerWrapper.id);
-    saveLocal();
+    // saveLocal();
   });
   const trashIcon = document.createElement("i");
 
@@ -92,31 +88,35 @@ function doneItem(id) {
   }
 }
 
-function saveLocal() {
-  localStorage.setItem("data", addedDiv.innerHTML);
-}
+signUp.addEventListener("click", () => {
+  window.location.href = "/HTML/signup.html";
+});
 
-function getLocal() {
-  addedDiv.innerHTML = localStorage.getItem("data");
-}
+// function saveLocal() {
+//   localStorage.setItem("data", addedDiv.innerHTML);
+// }
 
-function getLocal() {
-  addedDiv.innerHTML = localStorage.getItem("data");
+// function getLocal() {
+//   addedDiv.innerHTML = localStorage.getItem("data");
+// }
 
-  const allItems = addedDiv.querySelectorAll("div");
-  allItems.forEach((item) => {
-    const content = item.querySelector("p");
-    const trashIcon = item.querySelector("i");
+// function getLocal() {
+//   addedDiv.innerHTML = localStorage.getItem("data");
 
-    content.addEventListener("click", function () {
-      doneItem(item.id);
-      saveLocal();
-    });
+//   const allItems = addedDiv.querySelectorAll("div");
+//   allItems.forEach((item) => {
+//     const content = item.querySelector("p");
+//     const trashIcon = item.querySelector("i");
 
-    trashIcon.addEventListener("click", function () {
-      deleteItem(item.id);
-    });
-  });
-}
+//     content.addEventListener("click", function () {
+//       doneItem(item.id);
+//       saveLocal();
+//     });
 
-getLocal();
+//     trashIcon.addEventListener("click", function () {
+//       deleteItem(item.id);
+//     });
+//   });
+// }
+
+// getLocal();
