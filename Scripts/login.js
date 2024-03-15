@@ -11,18 +11,17 @@ function getUserId() {
   return localStorage.getItem("userId");
 }
 
-function createContentDiv(userInput) {
+function createContentDiv(userInput, taskId) {
   const outerWrapper = document.createElement("div");
-  outerWrapper.id = addedDiv.children.length;
+  outerWrapper.id = taskId;
 
-  // Create a div to contain the task text and trash icon
   const taskDiv = document.createElement("div");
   taskDiv.classList.add("task");
 
   const content = document.createElement("p");
   content.innerText = userInput;
 
-  const trashIcon = createTrashIcon(outerWrapper.id);
+  const trashIcon = createTrashIcon(taskId);
 
   taskDiv.appendChild(content);
   taskDiv.appendChild(trashIcon);
@@ -36,25 +35,33 @@ function createContentDiv(userInput) {
   return outerWrapper;
 }
 
-function createTrashIcon(id) {
+function createTrashIcon(taskId) {
   const trashIcon = document.createElement("i");
   trashIcon.className = "fa-solid fa-trash";
   trashIcon.addEventListener("click", function () {
-    deleteTask(id);
+    deleteTask(taskId);
   });
   return trashIcon;
 }
 
-async function deleteTask(id) {
+async function deleteTask(taskId) {
   try {
+    const userId = getUserId();
+
+    if (!userId) {
+      alert("User ID not found. Please log in.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("user_id", userId);
+    formData.append("task_id", taskId);
+
     const response = await fetch(
       "http://127.0.0.1/todo-list-backend/backend/deleteToDo.php",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: id }),
+        body: formData,
       }
     );
 
@@ -63,7 +70,7 @@ async function deleteTask(id) {
 
     if (data.status === "success") {
       console.log("Task deleted successfully");
-      deleteTaskFromDom(id, id.task);
+      deleteTaskFromDom(taskId);
     } else {
       console.error("Error deleting task:", data.message);
     }
@@ -114,6 +121,8 @@ async function fetchAndDisplayTasks() {
     if (data.status === "success") {
       data.tasks.forEach((task) => {
         createContentDiv(task);
+        console.log("task ", task);
+        console.log("task ID: ", data.task);
       });
     } else {
       console.error("Error fetching tasks:", data.message);

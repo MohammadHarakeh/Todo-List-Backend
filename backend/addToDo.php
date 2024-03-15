@@ -4,13 +4,13 @@ header("Access-Control-Allow-Origin: http://127.0.0.1:5500");
 header("Access-Control-Allow-Methods: POST, GET");
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Handling POST request to add a task
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
     $task = isset($_POST['task']) ? $_POST['task'] : '';
     $checkTask = isset($_POST['check_task']) ? $_POST['check_task'] : '';
 
-    // Check if the task already exists for this user
+
     $check_task_query = $mysqli->prepare('SELECT task FROM todo WHERE user_id=? AND task=?');
     $check_task_query->bind_param('is', $user_id, $task);
     $check_task_query->execute();
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $response['status'] = "error";
         $response['message'] = "Task already exists for this user";
     } else {
-        // Insert the task into the database
+
         $insert_task_query = $mysqli->prepare('INSERT INTO todo (user_id, task, check_task) VALUES (?, ?, ?)');
         $insert_task_query->bind_param('iss', $user_id, $task, $checkTask);
         
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode($response);
 } 
 
-// Handling GET request to fetch tasks
+
 else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     header("Content-Type: application/json");
 

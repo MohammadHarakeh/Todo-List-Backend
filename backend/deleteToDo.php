@@ -6,6 +6,7 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $task_id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -16,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($delete_query->execute()) {
         $response['status'] = "success";
         $response['message'] = "Task deleted successfully";
+        $response['id'] = $task_id;
     } else {
         $response['status'] = "error";
         $response['message'] = "Error deleting task";
