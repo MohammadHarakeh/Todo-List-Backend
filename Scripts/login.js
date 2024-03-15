@@ -45,6 +45,33 @@ function createTrashIcon(id) {
   return trashIcon;
 }
 
+async function deleteTask(id) {
+  try {
+    const response = await fetch(
+      "http://127.0.0.1/todo-list-backend/backend/deleteToDo.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: id }),
+      }
+    );
+
+    const data = await response.json();
+    console.log("Response from server:", data);
+
+    if (data.status === "success") {
+      console.log("Task deleted successfully");
+      deleteTaskFromDom(id, id.task);
+    } else {
+      console.error("Error deleting task:", data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 function styleContentDiv(content) {
   content.style.width = "100%";
   content.style.height = "80%";
@@ -135,7 +162,7 @@ function addToDo() {
     });
 }
 
-function deleteTask(id) {
+function deleteTaskFromDom(id) {
   const toDelete = document.getElementById(id);
   if (toDelete) {
     toDelete.remove();
