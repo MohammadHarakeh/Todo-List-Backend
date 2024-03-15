@@ -1,3 +1,7 @@
 .wrapper-title {
   padding-bottom: 10%;
 }
+
+.error-message {
+  color: red;
+}

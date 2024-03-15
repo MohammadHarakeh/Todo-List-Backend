@@ -31,7 +31,7 @@ login.addEventListener("click", () => {
 
         if (data.status === "error") {
           errorMessage.textContent = data.message;
-        } else if (data.status === "logged in") {
+        } else if (data.status === "success") {
           localStorage.setItem("userId", data.user_id);
           window.location.href = "/HTML/todo.html";
         }

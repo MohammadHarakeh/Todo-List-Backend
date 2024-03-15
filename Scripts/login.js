@@ -55,7 +55,7 @@ async function deleteTask(taskId) {
 
     const formData = new FormData();
     formData.append("user_id", userId);
-    formData.append("task_id", taskId);
+    formData.append("id", taskId);
 
     const response = await fetch(
       "http://127.0.0.1/todo-list-backend/backend/deleteToDo.php",
@@ -120,9 +120,9 @@ async function fetchAndDisplayTasks() {
 
     if (data.status === "success") {
       data.tasks.forEach((task) => {
-        createContentDiv(task);
+        createContentDiv(task, task.id); // Pass both task content and task id
         console.log("task ", task);
-        console.log("task ID: ", data.task);
+        console.log("task ID: ", task.id);
       });
     } else {
       console.error("Error fetching tasks:", data.message);
@@ -160,7 +160,7 @@ function addToDo() {
     .then((data) => {
       if (data.status === "success") {
         console.log("Task added successfully");
-        createContentDiv(userInput);
+        createContentDiv(userInput, data.id); // Pass the newly created task id
         document.getElementById("todoInput").value = "";
       } else {
         console.error("Error adding task:", data.message);
@@ -171,10 +171,13 @@ function addToDo() {
     });
 }
 
-function deleteTaskFromDom(id) {
-  const toDelete = document.getElementById(id);
-  if (toDelete) {
-    toDelete.remove();
+function deleteTaskFromDom(taskId) {
+  const taskElement = document.getElementById(taskId);
+  if (taskElement) {
+    taskElement.remove();
+    console.log("Task deleted successfully from DOM");
+  } else {
+    console.error("Task element not found");
   }
 }
 
