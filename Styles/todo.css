@@ -7,6 +7,23 @@
   margin-top: 5px;
 }
 
+.task {
+  display: flex;
+  width: 93%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.task p {
+  margin: 0;
+}
+
+.task i {
+  cursor: pointer;
+}
+
 .input-todo {
   margin-top: 3%;
   width: 100%;
@@ -37,6 +54,9 @@
 .todo-items-wrapper {
   width: 100%;
   margin-right: 20px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 60vh;
 }
 
 .todo-items {
@@ -44,7 +64,7 @@
   gap: 100%;
   justify-content: start;
   text-align: start;
-  width: 71%;
+  width: 90%;
   margin-right: 11%;
   border-radius: 4%;
   margin-top: 2%;

@@ -1,6 +1,8 @@
 const signUp = document.getElementById("sign-up");
 const addedDiv = document.getElementById("todoList");
 
+fetchAndDisplayTasks();
+
 function validateInput(input) {
   return input.trim().length > 0;
 }
@@ -13,16 +15,18 @@ function createContentDiv(userInput) {
   const outerWrapper = document.createElement("div");
   outerWrapper.id = addedDiv.children.length;
 
+  // Create a div to contain the task text and trash icon
+  const taskDiv = document.createElement("div");
+  taskDiv.classList.add("task");
+
   const content = document.createElement("p");
   content.innerText = userInput;
-  content.addEventListener("click", function () {
-    toggleDone(outerWrapper.id);
-  });
 
   const trashIcon = createTrashIcon(outerWrapper.id);
 
-  outerWrapper.appendChild(content);
-  outerWrapper.appendChild(trashIcon);
+  taskDiv.appendChild(content);
+  taskDiv.appendChild(trashIcon);
+  outerWrapper.appendChild(taskDiv);
   addedDiv.appendChild(outerWrapper);
 
   styleContentDiv(content);
@@ -50,6 +54,7 @@ function styleContentDiv(content) {
 }
 
 function styleOuterWrapper(outerWrapper) {
+  outerWrapper.style.position = "relative";
   outerWrapper.style.display = "flex";
   outerWrapper.style.maxWidth = "100%";
   outerWrapper.style.height = "fit-content";
@@ -57,10 +62,38 @@ function styleOuterWrapper(outerWrapper) {
 
 function styleTrashIcon(trashIcon) {
   trashIcon.style.position = "absolute";
-  trashIcon.style.right = "12%";
+  trashIcon.style.right = "-5%";
   trashIcon.style.marginTop = "0.5%";
   trashIcon.style.fontSize = "25px";
   trashIcon.style.cursor = "pointer";
+}
+
+async function fetchAndDisplayTasks() {
+  const userId = getUserId();
+
+  if (!userId) {
+    alert("User ID not found. Please log in.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      "http://127.0.0.1/todo-list-backend/backend/addToDo.php?user_id=" + userId
+    );
+
+    const data = await response.json();
+    console.log("Data received from server:", data);
+
+    if (data.status === "success") {
+      data.tasks.forEach((task) => {
+        createContentDiv(task);
+      });
+    } else {
+      console.error("Error fetching tasks:", data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 function addToDo() {
